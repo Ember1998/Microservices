@@ -1,0 +1,7 @@
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\PlatformService.exe
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\PlatformService.dll
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\Microsoft.OpenApi.dll
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
