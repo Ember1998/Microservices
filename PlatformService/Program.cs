@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PlatformService;
 
@@ -11,7 +12,8 @@ builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 builder.Services.AddDbContext<AppDbContext>(opt=>{
     opt.UseInMemoryDatabase("MemoDb");
 });
-
+var assemblies =AppDomain.CurrentDomain.GetAssemblies();
+builder.Services.AddAutoMapper(assemblies);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,30 +24,24 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.PrepPopulate();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+app.MapGet("/getAll",(IPlatformRepo _repo, IMapper _mapper)=>{
+    var platformItems = _repo.GetAllPlatforms();
+    return Results.Ok(_mapper.Map<IEnumerable<PlatformReadDTO>>(platformItems));
+}).WithName("GetPlatforms").WithOpenApi();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapPost("/create",(IPlatformRepo _repo, IMapper _mapper,PlatformCreateDTO item)=>{
+    var platformModel = _mapper.Map<Platform>(item);
+    _repo.CreatePlatform(platformModel);
+    _repo.SaveChanges();
 
+    var PlatformReadDTO=_mapper.Map<PlatformReadDTO>(platformModel);
+    return Results.CreatedAtRoute("GetPlatformById", new {Id=PlatformReadDTO.Id},PlatformReadDTO);
+}).WithName("CreatePlatform").WithOpenApi();
+
+app.MapGet("/getPlatformId",(IPlatformRepo _repo, IMapper _mapper, int Id)=>{
+    var platform = _repo.GetPlatformById(Id);
+    return Results.Ok(_mapper.Map<PlatformReadDTO>(platform));
+}).WithName("GetPlatformById").WithOpenApi();
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

@@ -3,23 +3,28 @@ namespace PlatformService;
 
 public class PlatformRepo: IPlatformRepo
 {
+    private readonly AppDbContext _dbcontext;
+    public PlatformRepo(AppDbContext dbcontext)
+    {
+        _dbcontext = dbcontext;
+    }
     public void CreatePlatform(Platform plat)
     {
-        throw new NotImplementedException();
+        _dbcontext.Platforms.Add(plat);
     }
 
     public IEnumerable<Platform> GetAllPlatforms()
     {
-        throw new NotImplementedException();
+        return _dbcontext.Platforms.ToList();
     }
 
     public Platform GetPlatformById(int Id)
     {
-        throw new NotImplementedException();
+        return _dbcontext.Platforms.FirstOrDefault(x=>x.Id == Id);
     }
 
     public bool SaveChanges()
     {
-        throw new NotImplementedException();
+        return _dbcontext.SaveChanges()>0;
     }
 }
