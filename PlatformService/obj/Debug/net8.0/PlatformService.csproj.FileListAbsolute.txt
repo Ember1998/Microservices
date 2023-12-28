@@ -139,3 +139,8 @@ F:\Projects\Microservices\PlatformService\obj\Debug\net8.0\refint\PlatformServic
 F:\Projects\Microservices\PlatformService\obj\Debug\net8.0\PlatformService.pdb
 F:\Projects\Microservices\PlatformService\obj\Debug\net8.0\PlatformService.genruntimeconfig.cache
 F:\Projects\Microservices\PlatformService\obj\Debug\net8.0\ref\PlatformService.dll
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\out\web.config
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\out\appsettings.Development.json
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\out\appsettings.json
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\out\PlatformService.deps.json
+F:\Projects\Microservices\PlatformService\bin\Debug\net8.0\out\PlatformService.runtimeconfig.json

@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 builder.Services.AddDbContext<AppDbContext>(opt=>{
-    opt.UseInMemoryDatabase("MemoDb");
+    opt.UseInMemoryDatabase("MemoDb1");
 });
 var assemblies =AppDomain.CurrentDomain.GetAssemblies();
 builder.Services.AddAutoMapper(assemblies);
@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.PrepPopulate();
+//app.PrepPopulate();
 
 app.MapGet("/getAll",(IPlatformRepo _repo, IMapper _mapper)=>{
     var platformItems = _repo.GetAllPlatforms();
